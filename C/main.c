@@ -157,6 +157,8 @@ void test238(){
     int nums[] = {-1,1,0,-3,3};
     int numsSize = 5;
 
+    printf("--- 238. Product of Array Except Self ---\n");
+
     print1DIntArray(nums, numsSize);
 
     int* rvSize = malloc(sizeof(int));
@@ -189,6 +191,9 @@ bool increasingTriplet(int* nums, int numsSize){
 void test334(){
     int nums[] = {1,2,3,4,5};
     int numsSize = 5;
+    
+    printf("--- 334. Increasing Triplet Subsequence ---\n");
+
     bool rv = increasingTriplet(nums, numsSize);
     printf("rv = %d\n", rv);
 }
@@ -236,6 +241,7 @@ char* longestPalindrome(char* s){
 void test5(){
     char* str1 = longestPalindrome("babad");
     char* str2 = longestPalindrome("xabbayd");
+    printf("--- 5. Longest Palindromic Substring ---\n");
     printf("Result: %s\n", str1);
     printf("Result: %s\n", str2);
 }
@@ -254,14 +260,12 @@ int compress(char* chars, int charsSize){
         }
         // printf("[%c] %d\n", letter, groupLength);
         chars[++res] = letter;
-        printf("[%d] = %c\n", res, letter);
 
         if(groupLength > 1){
             char groupLengthStr[10];
             sprintf(groupLengthStr, "%d", groupLength);
             for(int j = 0; j < strlen(groupLengthStr); j++){
                 chars[++res] = groupLengthStr[j];
-                printf("[%d] = %c\n", res, groupLengthStr[j]);
             }
         }
         
@@ -277,6 +281,7 @@ void test443(){
 
     int n1 = compress(arr1, 7);
 
+    printf("--- 443. String Compression ---\n");
 
     printf("Result 1: %d\n", n1);
     printf("Result 1 str: ");
@@ -331,6 +336,7 @@ void test283(){
     moveZeroes(nums1, nums1Size);
     moveZeroes(nums2, nums2Size);
 
+    printf("--- 283. Move Zeroes ---\n");
     printf("Result 1: ");
     print1DIntArray(nums1, nums1Size);
     printf("Result 2: ");
@@ -395,11 +401,64 @@ void test392(){
     char* s3 = "";
     char* t3 = ";fsdjkla";
 
+    printf("--- 392. Is Subsequence ---\n");
     printf("Result 1: %d\n", isSubsequenceV2(s1, t1));
     printf("Result 2: %d\n", isSubsequenceV2(s2, t2));
     printf("Result 3: %d\n", isSubsequenceV2(s3, t3));
 }
 
+// --- 11. Container With Most Water
+#define MAX(a,b) ((a > b) ? a : b)
+#define MIN(a,b) ((a < b) ? a : b)
+
+int maxArea(int* height, int heightSize){
+    int i = 0;
+    int j = heightSize - 1;
+
+    int ma = 0;
+
+    while(i != j){
+        ma = MAX(ma, MIN(height[j], height[i]) * (j - i));
+        (height[i] < height[j]) ? i++ : j--;
+    }
+
+    return ma;
+}
+
+void test11(){
+    int heights1[] = {1,8,6,2,5,4,8,3,7};
+    int heights2[] = {1,1};
+
+    int heights1Size = 9;
+    int heights2Size = 2;
+    printf("--- 11. Container With Most Water ---\n");
+    printf("Result 1: %d\n", maxArea(heights1, heights1Size));
+    printf("Result 2: %d\n", maxArea(heights2, heights2Size));
+}
+
+// --- 1679. Max Number of K-Sum Pairs
+int maxOperations(int* nums, int numsSize, int k){
+
+}
+
+void test1679(){
+
+}
+
 int main(int argc, char* argv[]){
-    test392();
+    int n;
+    printf("Enter a problem number: ");
+    scanf("%d", &n);
+    printf("\n");
+    switch(n){
+        case 238: test238(); break;
+        case 334: test334(); break;
+        case 5: test5(); break;
+        case 443: test443(); break;
+        case 283: test283(); break;
+        case 392: test392(); break;
+        case 11: test11(); break;
+        case 1679: test1679(); break;
+        default: return 0;
+    }
 }
