@@ -247,7 +247,6 @@ void test5(){
 }
 
 // --- 443. String Compression ---
-
 int compress(char* chars, int charsSize){
     int i = 0, res = -1;
 
@@ -304,7 +303,6 @@ void test443(){
 }
 
 // --- 283. Move Zeroes ---
-
 void moveZeroes(int* nums, int numsSize){
     int numZeroes = 0;
 
@@ -436,15 +434,6 @@ void test11(){
     printf("Result 2: %d\n", maxArea(heights2, heights2Size));
 }
 
-// --- 1679. Max Number of K-Sum Pairs
-int maxOperations(int* nums, int numsSize, int k){
-
-}
-
-void test1679(){
-
-}
-
 int main(int argc, char* argv[]){
     int n;
     printf("Enter a problem number: ");
@@ -458,7 +447,6 @@ int main(int argc, char* argv[]){
         case 283: test283(); break;
         case 392: test392(); break;
         case 11: test11(); break;
-        case 1679: test1679(); break;
         default: return 0;
     }
 }
