@@ -1,4 +1,6 @@
 import java.util.ArrayDeque;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Solution {
   public int maxVowels(String s, int k){
@@ -145,4 +147,55 @@ public class Solution {
 
     return max;
   }
+
+  public boolean isSubsequence(String s, String t){
+    // two pointers
+    int i = 0; 
+    int j = 0;
+
+    while(i < t.length() && j < s.length()){
+      if(t.charAt(i++) == s.charAt(j)) j++;
+    }
+
+    if(j == s.length()) return true;
+    return false;
+  }
+
+  public int maxArea(int[] height){
+    int max = 0;
+
+    int l = 0;
+    int r = height.length - 1;
+
+    while(l < r){
+      max = Math.max(max, (r - l) * Math.min(height[l], height[r]));
+     
+      if(height[l] < height[r]){
+        l++;
+      } else {
+        r--;
+      }
+    }
+    return max;
+  }
+
+  public int maxOperations(int[] nums, int k){
+    int count = 0;
+    Map<Integer, Integer> M = new HashMap<>();
+
+    for(int i = 0; i < nums.length; i++){
+      int x = nums[i];
+      int y = k - x;
+
+      if(M.containsKey(y) && M.get(y) > 0){
+        M.put(y, M.get(y) - 1);
+        count++;
+      } else {
+        M.put(x, M.getOrDefault(x, 0) + 1);
+      }
+    }
+    
+    return count;
+  }
+
 }

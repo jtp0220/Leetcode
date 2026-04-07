@@ -7,12 +7,19 @@ public class Leetcode {
     Test.showProblems();
 
     while(true){
-      System.out.print("Type a problem number to run or q to quit: ");
+      System.out.println("=".repeat(50));
+      System.out.println("Menu:\n - [number] to run a problem\n - q to quit\n - p to show problems:");
+      System.out.print("\nInput: ");
       String input = scanner.nextLine();
 
       if(input.toLowerCase().equals("q")){
         scanner.close();
         return;
+      }
+
+      if(input.toLowerCase().equals("p")){
+        Test.showProblems();
+        continue;
       }
 
       try {

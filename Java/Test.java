@@ -13,6 +13,9 @@ public class Test {
     problems.put(643, Test::test643);
     problems.put(283, Test::test283);
     problems.put(1732, Test::test1732);
+    problems.put(392, Test::test392);
+    problems.put(11, Test::test11);
+    problems.put(1679, Test::test1679);
   }
 
   // ============================ PRINT METHODS ============================
@@ -33,15 +36,13 @@ public class Test {
     System.out.println(String.format("Output: %s\n" + (expected.isEmpty() ? "" : "Expected %s\n"), output, expected));
   }
 
-  private static final void printResult(String output){
-    printResult(output, "");
-  }
-
   public static final void showProblems(){
-    System.out.print("Problems: ");
+    System.out.println("=".repeat(50));
+    System.out.println("Problems:");
     int i = 0;
     for(int key : problems.keySet()){
       System.out.print(key + ((i++ == problems.size() - 1) ? "\n" : ", "));
+      if(i % 10 == 0) System.out.println();
     }
   }
 
@@ -167,4 +168,54 @@ public class Test {
 
   }
 
+  private static final void test392(){
+    printHeader("392. Is Subsequence");
+
+    String s[] = {"abc", "axc"};
+    String t[] = {"ahbgdc", "ahbgdc"};
+    boolean expected[] = {true, false};
+
+    for(int i = 0; i < s.length; i++){
+      printExampleHeader(i + 1);
+      boolean result = solution.isSubsequence(s[i], t[i]);
+      printResult(Boolean.toString(result), Boolean.toString(expected[i]));
+    }
+  }
+
+  private static final void test11(){
+    printHeader("11. Container With Most Water");
+
+    int height[][] = {
+      {1,8,6,2,5,4,8,3,7},
+      {1,1}
+    };
+
+    int expected[] = {49, 1};
+
+    for(int i = 0; i < height.length; i++){
+      printExampleHeader(i + 1);
+      int result = solution.maxArea(height[i]);
+      printResult(Integer.toString(result), Integer.toString(expected[i]));
+    }
+
+  }
+
+  private static final void test1679(){
+    printHeader("1679. Max Number of K-Sum Pairs");
+
+    int nums[][] = {
+      {1,2,3,4},
+      {3,1,3,4,3}
+    };
+
+    int k[] = {5, 6};
+
+    int expected[] = {2, 1};
+
+    for(int i = 0; i < nums.length; i++){
+      printExampleHeader(i + 1);
+      int result = solution.maxOperations(nums[i], k[i]);
+      printResult(Integer.toString(result), Integer.toString(expected[i]));
+    }
+  }
 }
