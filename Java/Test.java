@@ -16,6 +16,7 @@ public class Test {
     problems.put(392, Test::test392);
     problems.put(11, Test::test11);
     problems.put(1679, Test::test1679);
+    problems.put(724, Test::test724);
   }
 
   // ============================ PRINT METHODS ============================
@@ -37,12 +38,12 @@ public class Test {
   }
 
   public static final void showProblems(){
-    System.out.println("=".repeat(50));
+    System.out.println("=".repeat(55));
     System.out.println("Problems:");
     int i = 0;
     for(int key : problems.keySet()){
       System.out.print(key + ((i++ == problems.size() - 1) ? "\n" : ", "));
-      if(i % 10 == 0) System.out.println();
+      if(i % 10 == 0 && i < problems.size()) System.out.println();
     }
   }
 
@@ -215,6 +216,24 @@ public class Test {
     for(int i = 0; i < nums.length; i++){
       printExampleHeader(i + 1);
       int result = solution.maxOperations(nums[i], k[i]);
+      printResult(Integer.toString(result), Integer.toString(expected[i]));
+    }
+  }
+
+  private static final void test724(){
+    printHeader("724. Find Pivot Index");
+
+    int nums[][] = {
+      {1,7,3,6,5,6},
+      {1,2,3},
+      {2,1,-1}
+    };
+
+    int expected[] = {3, -1, 0};
+
+    for(int i = 0; i < nums.length; i++){
+      printExampleHeader(i + 1);
+      int result = solution.pivotIndex(nums[i]);
       printResult(Integer.toString(result), Integer.toString(expected[i]));
     }
   }

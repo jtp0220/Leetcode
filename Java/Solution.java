@@ -1,4 +1,5 @@
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -194,8 +195,26 @@ public class Solution {
         M.put(x, M.getOrDefault(x, 0) + 1);
       }
     }
-    
+
     return count;
   }
 
+  public int pivotIndex(int[] nums){
+    int pivot = -1;
+    int rightSum = 0;
+
+    // Get sum of array
+    for(int i = 0; i < nums.length; i++) rightSum += nums[i];
+
+    // Find pivot
+    int leftSum = 0;
+
+    for(int i = 0; i < nums.length; i++){
+      if(leftSum == rightSum - nums[i]) return i;
+      leftSum += nums[i];
+      rightSum -= nums[i];
+    }
+    
+    return pivot;
+  }
 }

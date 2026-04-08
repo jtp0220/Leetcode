@@ -7,8 +7,8 @@ public class Leetcode {
     Test.showProblems();
 
     while(true){
-      System.out.println("=".repeat(50));
-      System.out.println("Menu:\n - [number] to run a problem\n - q to quit\n - p to show problems:");
+      System.out.println("=".repeat(55));
+      System.out.println("Menu:\n - [number] to run a problem\n - q to quit\n - p to show problems");
       System.out.print("\nInput: ");
       String input = scanner.nextLine();
 
