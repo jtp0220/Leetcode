@@ -1,6 +1,7 @@
 import java.util.ArrayDeque;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Solution {
@@ -217,4 +218,114 @@ public class Solution {
     
     return pivot;
   }
+
+  public List<List<Integer>> findDifference(int[] nums1, int[] nums2){
+    List<List<Integer>> diff = new ArrayList<>();
+    Map<Integer, Integer> M1 = new HashMap<>();
+    Map<Integer, Integer> M2 = new HashMap<>();
+
+    // Step 1. Log all possible numbers
+    for(int i = 0; i < nums1.length; i++){
+      M1.putIfAbsent(nums1[i], 1);
+    }
+  
+    for(int i = 0; i < nums2.length; i++){
+      M2.putIfAbsent(nums2[i], 1);
+    }
+
+    // Create return lists
+    diff.add(new ArrayList<>());
+    for(int i = 0; i < nums1.length; i++){
+      if(M2.getOrDefault(nums1[i], 0) == 0){
+        diff.get(0).add(nums1[i]);
+        M2.put(nums1[i], 1);
+      }
+    }
+
+    diff.add(new ArrayList<>());
+    for(int i = 0; i < nums2.length; i++){
+      if(M1.getOrDefault(nums2[i], 0) == 0){
+        diff.get(1).add(nums2[i]);
+         M1.put(nums2[i], 1);
+      }
+    }
+
+
+    return diff;
+  }
+
+  public boolean uniqueOccurences(int[] arr){
+
+
+    
+
+    return false;
+  }
+
+  public int maxDepth(TreeNode root) {
+    int result = maxDepth_dfs(root);
+    return result;
+  }
+
+  public int maxDepth_dfs(TreeNode node){
+
+    // Base case: No leaf
+    if(node == null) return 0;
+    System.out.println(node.val);
+
+    int left = maxDepth_dfs(node.left);
+    int right = maxDepth_dfs(node.right);
+
+    return 1 + Math.max(left, right);
+  }
+
+  public boolean leafSimilar(TreeNode root1, TreeNode root2){
+    List<Integer> T1 = new ArrayList<>();
+    List<Integer> T2 = new ArrayList<>();
+    
+    leafSimilar_dfs(root1, T1);
+    leafSimilar_dfs(root2, T2);
+
+    if(T1.equals(T2)) return true;
+    return false;
+  }
+
+  public void leafSimilar_dfs(TreeNode node, List<Integer> L){
+    if(node == null) return;
+
+    if(node != null && node.left == null && node.right == null){
+      L.add(node.val);
+      return;
+    }
+
+    leafSimilar_dfs(node.left, L);
+    leafSimilar_dfs(node.right, L);
+
+  }
+
+  public int goodNodes(TreeNode root){
+    int count = goodNodes_bfs(root, Integer.MIN_VALUE);
+    return count;
+  }
+
+  public int goodNodes_bfs(TreeNode node, int max){
+    // max = max val of current path
+    
+    if(node == null){
+      return 0;
+    }
+
+    int good = 0;
+
+    // Check with max
+    if(node.val >= max){
+      good++;
+    }
+  
+    max = Math.max(max, node.val);
+
+    return good + goodNodes_bfs(node.left, max) + goodNodes_bfs(node.right, max);
+    
+  }
+  
 }

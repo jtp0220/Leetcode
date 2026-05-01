@@ -1,5 +1,7 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Test {
@@ -17,6 +19,8 @@ public class Test {
     problems.put(11, Test::test11);
     problems.put(1679, Test::test1679);
     problems.put(724, Test::test724);
+    problems.put(2215, Test::test2215);
+    problems.put(1207, Test::test1207);
   }
 
   // ============================ PRINT METHODS ============================
@@ -34,16 +38,17 @@ public class Test {
   }
 
   private static final void printResult(String output, String expected){
-    System.out.println(String.format("Output: %s\n" + (expected.isEmpty() ? "" : "Expected %s\n"), output, expected));
+    System.out.println(String.format("Output: %s\n" + (expected.isEmpty() ? "" : "Expected: %s\n"), output, expected));
   }
 
   public static final void showProblems(){
     System.out.println("=".repeat(55));
     System.out.println("Problems:");
     int i = 0;
+    int rowSize = 10;
     for(int key : problems.keySet()){
-      System.out.print(key + ((i++ == problems.size() - 1) ? "\n" : ", "));
-      if(i % 10 == 0 && i < problems.size()) System.out.println();
+      System.out.print(key + ((i++ == problems.size() - 1) ? "\n" : (i % rowSize == 0) ? " " : ", "));
+      if(i % rowSize == 0 && i < problems.size()) System.out.println();
     }
   }
 
@@ -237,4 +242,54 @@ public class Test {
       printResult(Integer.toString(result), Integer.toString(expected[i]));
     }
   }
+
+  private static final void test2215(){
+    printHeader("2215. Find the Difference of Two Arrays");
+
+    int nums[][][] = {
+      {
+        {1,2,3},
+        {2,4,6},
+      },
+      {
+        {1,2,3,3},
+        {1,1,2,2},
+      }
+    };
+
+    List<List<List<Integer>>> expected = new ArrayList<>();
+    expected.add(Arrays.asList(
+      Arrays.asList(1, 3), Arrays.asList(4, 6)
+    ));
+    expected.add(Arrays.asList(
+      Arrays.asList(3), new ArrayList<>()
+    ));
+
+    for(int i = 0; i < nums.length; i++){
+      printExampleHeader(i + 1);
+      List<List<Integer>> result = solution.findDifference(nums[i][0], nums[i][1]);
+      printResult(result.toString(), expected.get(i).toString());
+    }
+
+
+  }
+
+  private static final void test1207(){
+    printHeader("1207. Unique Number of Occurences");
+
+    int arr[][] = {
+      {1,2,2,1,1,3},
+      {1,2},
+      {-3,0,1,-3,1,1,1,-3,10,0}
+    };
+
+    boolean expected[] = {true, false, true};
+
+    for(int i = 0; i < arr.length; i++){
+      printExampleHeader(i + 1);
+      boolean result = solution.uniqueOccurences(arr[i]);
+      printResult(Boolean.toString(result), Boolean.toString(expected[i]));
+    }
+  }
+
 }
