@@ -1,4 +1,3 @@
-from typing import List
 from test import Test
         
 def main():    

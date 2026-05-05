@@ -1,5 +1,6 @@
 from typing import *
 from solution import Solution
+
 class Test:
   solution = Solution()
   problems: dict = {}
@@ -18,8 +19,10 @@ class Test:
   
   @staticmethod
   def _print_result(output: str, expected: str = ""):
-    print(f"Output: {output}\n" + (f"Expected: {expected}\n" if expected is not None else ""))
-
+    print(f"  Output: {output}")
+    print(f"Expected: {expected}")
+    print(f"  Passed: {output == expected}\n")
+    
   # ============================ TEST METHODS ============================
   @staticmethod
   def _test1679():
@@ -184,7 +187,194 @@ class Test:
       Test._print_example_header(i + 1)
       result = Test.solution.asteroidCollision(asteroids[i])
       Test._print_result(result, expected[i])
+  
+  def _test394():
+    Test._print_header("394. Decode String")
     
+    s = [
+      "3[a]2[bc]",
+      "3[a2][c]",
+      "2[abc]3[cd]ef"
+    ]
+    
+    expected = [
+      "aaabcbc",
+      "accaccacc",
+      "abcabccdcdcdef"
+    ]
+    
+    for i, _ in enumerate(s):
+      Test._print_example_header(i + 1)
+      result = Test.solution.decodeString(s[i])
+      Test._print_result(result, expected[i])
+  
+  def _test5():
+    Test._print_header("5. Longest Palindromic Substring")
+    
+    s = [
+      "babad",
+      "cbbd"
+    ]
+    
+    expected = [
+      "bab",
+      "bb"
+    ]
+    
+    for i, _ in enumerate(s):
+      Test._print_example_header(i + 1)
+      result = Test.solution.longestPalindrome(s[i])
+      Test._print_result(result, expected[i])
+
+  def _test79():
+    Test._print_header("79. Word Search")
+    
+    board = [
+      [
+        ["A", "B", "C", "E"],
+        ["S", "F", "C", "S"],
+        ["A", "D", "E", "E"]
+      ]
+    ]
+    
+    word = [
+      "ABCCED"
+    ]
+    
+    expected = [
+      True
+    ]
+    
+    for i, _ in enumerate(board):
+      Test._print_example_header(i + 1)
+      result = Test.solution.exist(board[i], word[i])
+      Test._print_result(result, expected[i])
+
+  def _test17():
+    Test._print_header("17. Letter Combinations of a Phone Number")
+    
+    digits = [
+      "23", "2"
+    ]
+
+    expected = [
+      ["ad","ae","af","bd","be","bf","cd","ce","cf"],
+      ["a","b","c"]
+    ]
+    
+    for i in range(len(digits)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.letterCombinations(digits[i])
+      Test._print_result(result, expected[i])
+
+  def _test22():
+    Test._print_header("22. Generate Parentheses")
+    
+    n = [3, 1, 2]
+    expected = [
+      ["((()))","(()())","(())()","()(())","()()()"],
+      ["()"],
+      [ "(())","()()"]
+    ]
+    
+    for i in range(len(n)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.generateParenthesis(n[i])
+      Test._print_result(result, expected[i])
+    
+  def _test39():
+    Test._print_header("39. Combination Sum")
+    
+    candidates = [
+      [2,3,6,7],
+      [2,3,5],
+      [2]
+    ]
+    
+    target = [
+      7, 8, 1
+    ]
+    
+    expected = [
+      [[2,2,3],[7]],
+      [[2,2,2,2],[2,3,3],[3,5]],
+      []
+    ]
+    
+    for i in range(len(candidates)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.combinationSum(candidates[i], target[i])
+      Test._print_result(result, expected[i])
+    
+  def _test40():
+    Test._print_header("39. Combination Sum")
+    
+    candidates = [
+      [10,1,2,7,6,1,5],
+      [2,5,2,1,2],
+    ]
+    
+    target = [
+      8, 5
+    ]
+    
+    expected = [
+      [[1,1,6],[1,2,5],[1,7],[2,6]],
+      [[1,2,2,],[5]]
+    ]
+    for i in range(len(candidates)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.combinationSum2(candidates[i], target[i])
+      Test._print_result(result, expected[i])
+    
+  def _test1():
+    Test._print_header("1. Two Sum")
+    nums = [
+      [2,7,11,15],
+      [3,2,4],
+      [3,3]
+    ]
+    
+    target = [9, 6, 6]
+    
+    expected = [
+      [0, 1],
+      [1, 2],
+      [0, 1]
+    ]
+    
+    for i in range(len(nums)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.twoSum(nums[i], target[i])
+      Test._print_result(result, expected[i])
+    
+  def _test88():
+    Test._print_header("88. Merge Sorted Array")
+    
+    nums = [
+      [
+        [1,2,3,0,0,0],
+        [2,5,6],
+      ],
+      [
+        [1],
+        []
+      ],
+      [
+        [0],
+        [1]
+      ]
+    ]
+    
+    mn = [[3, 3],[1, 0],[0,1]]
+    
+    expected = [[1,2,2,3,5,6], [1], [1]]
+  
+    for i in range(len(nums)):
+      Test._print_example_header(i + 1)
+      Test.solution.merge(nums[i][0], mn[i][0], nums[i][1], mn[i][1])
+      Test._print_result(nums[i][0], expected[i])
+  
   # ============================ STORE PROBLEMS ============================ 
   problems[1679] = _test1679
   problems[238] = _test238
@@ -195,6 +385,15 @@ class Test:
   problems[2352] = _test2352
   problems[2390] = _test2390
   problems[735] = _test735
+  problems[394] = _test394
+  problems[5] = _test5
+  problems[79] = _test79
+  problems[17] = _test17
+  problems[22] = _test22
+  problems[39] = _test39
+  problems[40] = _test40
+  problems[1] = _test1
+  problems[88] = _test88
   
   @staticmethod
   def show_problems():

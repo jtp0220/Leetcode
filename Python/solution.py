@@ -1,4 +1,5 @@
 from typing import List
+from collections import deque
 
 class Solution:
     def isUnique(self, c: str, record: List[str]):
@@ -303,3 +304,195 @@ class Solution:
                     break
                 
         return result
+    
+    def decodeString(self, s: str) -> str:
+        
+        stack = []
+        substring = ""
+        
+        for c in (s):
+            if(c.isdigit()):
+                stack.append(substring)
+                stack.append(c)
+                substring = ""
+            elif(c  == "["):
+                continue
+            elif(c == "]"):
+                n = int(stack.pop())
+                print(f"n: {n}")
+                prevString = stack.pop()
+                substring = prevString + n * substring      
+            else:
+                substring += c
+        return substring
+
+    # TODO
+    def longestPalindrome(self, s: str) -> str:
+        pass
+
+    # TODO        
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        pass
+
+    def letterCombinations(self, digits: str) -> List[str]:
+        
+        result = []
+        
+        keypad = {
+            "2" : "abc",
+            "3" : "def",
+            "4" : "ghi",
+            "5" : "jkl",
+            "6" : "mno",
+            "7" : "pqrs",
+            "8" : "tuv",
+            "9" : "wxyz"
+        }
+                
+        # Example 1: [2, 3]
+                
+        def dfs(index: int, path: str):
+            
+            if index == len(digits):
+                result.append(path)
+                return
+            
+            letters = keypad[digits[index]]
+            
+            for letter in letters:
+                dfs(index + 1, path + letter)
+               
+        dfs(0, "")
+        
+        return result
+        
+    def generateParenthesis(self, n: int) -> List[str]:
+        
+        result = []
+        
+        def dfs(index: int, path: str, l: int, r: int):
+            
+            if index == n * 2:
+                result.append(path)
+                return 
+        
+            if l < n:
+                dfs(index + 1, path + "(", l + 1, r + 1)
+                
+            if r > 0:
+                dfs(index + 1, path + ")", l, r - 1)
+            
+            return
+            
+        dfs(0, "", 0, 0)
+        
+        return result
+
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+
+        result: List[List[int]] = []
+        
+        def dfs(index: int, path: List[int]):
+            
+            if(sum(path) == target):
+                result.append(path)
+                return
+            
+            if(sum(path) > target):
+                return 
+                        
+            for i in range(index, len(candidates)):
+                dfs(i, path + [candidates[i]])
+        
+        dfs(0, [])
+        
+        return result
+
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+
+        result = []
+        
+        candidates.sort()
+        
+        def dfs(index: int, path: List[int], total: int):
+            
+            if(total == target):
+                if path not in result:
+                    result.append(path)
+                return
+            
+            if(total > target):
+                return 
+
+
+            # Since candidates are sorted, we have ex. [1, 1, 1, 2, 2, 2, 3, 3, 3, ...]
+            # At the current dfs level, we don't want to use the same number more than once since its inefficient
+            # prev allows us to use a number once, and skip all other instances
+            # this avoids creating any duplicates from the beginning
+            prev = -1
+            
+            for i in range(index, len(candidates)):
+
+                    if prev == candidates[i]:
+                        continue
+                    prev = candidates[i]
+                    
+                    # If total + ith element exceeds the target, then surely any (i + 1)th element will too since candidates are sorted
+                    if total + candidates[i] > target:
+                        break
+                    
+                    dfs(i + 1, path + [candidates[i]], total + candidates[i])
+        
+        dfs(0, [], 0)            
+        
+        return result
+    
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+
+        result = []        
+        d = {}
+
+        for i in range(len(nums)):
+            x = nums[i]
+
+            if(x in d):
+                return [d[x], i]
+            y = target - x
+            d[y] = i
+            
+        return result
+        
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+        #key: iterate backwards
+        i = m - 1
+        j = n - 1
+        k = m + n - 1
+        
+        while(k > -1):
+            x = nums1[i] if i > -1 else None
+            y = nums2[j] if j > -1 else None
+            
+            if(x == None):
+                nums1[k] = y
+                j -= 1
+            elif(y == None):
+                nums1[k] = x
+                i -= 1
+            elif(x > y):
+                nums1[k] = x
+                i -= 1
+            else:
+                nums1[k] = y
+                j -= 1
+            k -= 1
+            
+# 933. Number of Recent Calls
+class RecentCounter:
+    def __init__(self):
+        self.log: deque = deque()
+    
+    def ping(self, t: int) -> int:
+        self.log.append(t)
+        while(self.log[0] < t - 3000):
+            self.log.popleft()
+        return len(self.log)
