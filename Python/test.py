@@ -375,6 +375,46 @@ class Test:
       Test.solution.merge(nums[i][0], mn[i][0], nums[i][1], mn[i][1])
       Test._print_result(nums[i][0], expected[i])
   
+  def _test46():
+    Test._print_header("46. Permutations")
+    
+    nums = [
+      [1,2,3],
+      [0,1],
+      [1]
+    ]
+    
+    expected = [
+      [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]],
+      [[0,1],[1,0]],
+      [[1]]
+    ]
+    
+    for i in range(len(nums)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.permute(nums[i])
+      Test._print_result(result, expected[i])
+  
+  def _test47():
+    Test._print_header("47. Permutations II")
+
+    nums = [
+      [1,1,2],
+      [1,2,3],
+      [3,3,0,3]
+    ]
+    
+    expected = [
+      [[1,1,2],[1,2,1],[2,1,1]],
+      [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]],
+      [[0,3,3,3],[3,0,3,3],[3,3,0,3],[3,3,3,0]]
+    ]
+    
+    for i in range(len(nums)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.permuteUnique(nums[i])
+      Test._print_result(result, expected[i])
+  
   # ============================ STORE PROBLEMS ============================ 
   problems[1679] = _test1679
   problems[238] = _test238
@@ -394,6 +434,8 @@ class Test:
   problems[40] = _test40
   problems[1] = _test1
   problems[88] = _test88
+  problems[46] = _test46
+  problems[47] = _test47
   
   @staticmethod
   def show_problems():

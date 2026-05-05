@@ -485,7 +485,51 @@ class Solution:
                 nums1[k] = y
                 j -= 1
             k -= 1
+
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        result = []
+        
+        def dfs(indices: set, path: List[int]):
             
+            if(len(path) == len(nums)):
+                result.append(path)
+                return
+            
+            for i in range(len(nums)):
+                if i in indices:
+                    continue
+                dfs(indices + (i,), path + [nums[i]])
+        
+        dfs((), [])
+        return result
+        
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        
+        result = []
+        nums.sort()
+        def dfs(indices: set, path: List[int]):
+            if(len(path) == len(nums)):
+                result.append(path)
+                return
+            
+            prev = -11
+            for i in range(len(nums)):
+                if nums[i] == prev:
+                    continue
+
+                if i in indices:
+                    continue
+            
+                prev = nums[i]
+                
+                dfs(indices + (i,), path + [nums[i]])
+            
+    
+        dfs((), [])
+        return result
+        
+    
+    
 # 933. Number of Recent Calls
 class RecentCounter:
     def __init__(self):
