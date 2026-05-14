@@ -1,5 +1,7 @@
 from typing import *
 from solution import Solution
+import traceback
+from ListNode import ListNode
 
 class Test:
   solution = Solution()
@@ -22,7 +24,7 @@ class Test:
     print(f"  Output: {output}")
     print(f"Expected: {expected}")
     print(f"  Passed: {output == expected}\n")
-    
+
   # ============================ TEST METHODS ============================
   @staticmethod
   def _test1679():
@@ -90,7 +92,6 @@ class Test:
       Test._print_result(result, expected[i])
 
   @staticmethod
-  
   def _test1207():
     Test._print_header("1207. Unique Number of Occurrences")
     
@@ -415,6 +416,351 @@ class Test:
       result = Test.solution.permuteUnique(nums[i])
       Test._print_result(result, expected[i])
   
+  def _test494():
+    Test._print_header("494. Target Sum")
+    
+    nums = [
+      [1,1,1,1,1],
+      [1]
+    ]
+    
+    target = [3, 1]
+    expected = [5, 1]
+    
+    for i in range(len(nums)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.findTargetSumWays(nums[i], target[i])
+      Test._print_result(result, expected[i])
+  
+  def _test392():
+    Test._print_header("392. Is Subsequence")
+    
+    input = [
+      ["abc", "ahbgdc"],
+      ["axc", "ahbgdc"]
+    ]
+
+    expected = [
+      True, False
+    ]
+
+    for i in range(len(input)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.isSubsequence(input[i][0], input[i][1])
+      Test._print_result(result, expected[i])
+
+  def _test70():
+    Test._print_header("70. Climbing Stairs")
+    
+    n = [2, 3]
+    expected = [2, 3]
+    for i in range(len(n)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.climbStairs(n[i])
+      Test._print_result(result, expected[i])
+  
+  def _test983():
+    Test._print_header("983. Minimum Cost For Tickets")
+    
+    days = [
+      [1,4,6,7,8,20],
+      [1,2,3,4,5,6,7,8,9,10,30,31],
+      [1],
+      [1,4,6,9,10,11,12,13,14,15,16,17,18,20,21,22,23,27,28] # 3x6 + 13*2
+    ]
+    
+    costs = [
+      [2,7,15],
+      [2,7,15],
+      [2,7,15],
+      [3,13,45]
+    ]
+    
+    expected = [11, 17, 2, 44]
+    
+    for i in range(len(days)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.mincostTickets(days[i], costs[i])
+      Test._print_result(result, expected[i])
+    
+  def _test322():
+    Test._print_header("322. Coin Change")
+    
+    coins = [
+      [1,2,5],
+      [2],
+      [1]
+    ]
+    
+    amount = [11, 3, 0]
+    
+    expected = [3, -1, 0]
+    
+    for i in range(len(coins)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.coinChange(coins[i], amount[i])
+      Test._print_result(result, expected[i])
+    
+  def _test518():
+    Test._print_header("518. Coin Change II")
+    
+    amount = [5, 3, 10]
+    coins = [
+      [1,2,5],
+      [2],
+      [10]
+    ]
+    expected = [4,0,1]
+    
+    for i in range(len(amount)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.change(amount[i], coins[i])
+      Test._print_result(result, expected[i])
+  
+  def _test649():
+    Test._print_header("649. Dota2 Senate")
+    
+    senate = ["RD", "RDD", "RRDDD"]
+    expected = ["Radiant", "Dire", "Radiant"]
+    
+    for i in range(len(senate)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.predictPartyVictory(senate[i])
+      Test._print_result(result, expected[i])
+      
+  def _test2095():
+    Test._print_header("2095. Delete the Middle Node of a Linked List")
+    
+    head = [
+      [1,3,4,7,1,2,6],
+      [1,2,3,4],
+      [2,1],
+      [1]
+    ]
+    
+    expected = [
+      [1,3,4,1,2,6],
+      [1,2,4],
+      [2],
+      []
+    ]
+    
+    for i in range(len(head)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.deleteMiddle(ListNode.buildLL(head[i]))
+      Test._print_result(ListNode.LLtoArray(result), expected[i])
+    
+  def _test328():
+    Test._print_header("328. Odd Even Linked List")
+    head = [
+      [1,2,3,4,5],
+      [2,1,3,5,6,4,7]
+    ]
+    
+    expected = [
+      [1,3,5,2,4],
+      [2,3,6,7,1,5,4]
+    ]
+    
+    for i in range(len(head)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.oddEvenList(ListNode.buildLL(head[i]))
+      Test._print_result(ListNode.LLtoArray(result), expected[i])
+    
+  def _test206():
+    Test._print_header("206. Reverse Linked List")
+    head = [
+      [1,2,3,4,5],
+      [5,4,3,2,1],
+      []
+    ]
+    
+    expected = [
+      [5,4,3,2,1],
+      [1,2,3,4,5],
+      []
+      ]
+    
+    for i in range(len(head)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.reverseList(ListNode.buildLL(head[i]))
+      Test._print_result(ListNode.LLtoArray(result), expected[i])
+    
+  def _test7():
+    Test._print_header("7. Reverse Integer")
+    x = [123,-123, 120, 1020304]
+    expected = [321, -321, 21, 4030201]
+    
+    for i in range(len(x)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.reverse(x[i])
+      Test._print_result(result, expected[i])
+  
+  def _test27():
+    Test._print_header("27. Remove Element")
+    
+    nums = [
+      [3,2,2,3],
+      [0,1,2,2,3,0,4,2],
+      [],
+      [1],
+      [2]
+    ]
+    
+    val = [3, 2, 1, 1, 1]
+        
+    expected = [
+      [2,[2,2]],
+      [5,[0,1,4,0,3]],
+      [0,[]],
+      [0,[]],
+      [1,[2]]
+    ]
+        
+    for i in range(len(nums)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.removeElement(nums[i], val[i])
+      Test._print_result(f"{result}, {nums[i][0:len(expected[i][1])]}",f"{expected[i][0]}, {expected[i][1]}")
+    
+  def _test26():
+    Test._print_header("26. Remove Duplicates from Sorted Array")
+    
+    nums = [
+      [1,1,2],
+      [0,0,1,1,1,2,2,3,3,4],
+      [0,0,1,1,1,1,2,3,3]
+    ]
+    
+    expected = [
+      [2, [1,2]],
+      [5,[0,1,2,3,4]],
+      [4, [0,1,2,3]]
+    ]
+    
+    for i in range(len(nums)):
+     Test._print_example_header(i + 1)
+     result = Test.solution.removeDuplicates(nums[i])
+     Test._print_result(f"{result}, {nums[i][0:len(expected[i][1])]}", f"{expected[i][0]}, {expected[i][1]}")
+    
+  def _test80():
+    Test._print_header("80. Remove Duplicates from Sorted Array II")
+    
+    nums = [
+      [1,1,1,2,2,3],
+      [0,0,1,1,1,1,2,3,3]
+    ]
+    
+    expected = [
+      [5, [1,1,2,2,3]],
+      [7,[0,0,1,1,2,3,3]]
+    ]
+    
+    for i in range(len(nums)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.removeDuplicates2(nums[i])
+      Test._print_result(f"{result}, {nums[i][0:len(expected[i][1])]}", f"{expected[i][0]}, {expected[i][1]}")
+  
+  def _test189():
+    Test._print_header("189. Rotate Array")
+    
+    nums = [
+      [1,2,3,4,5,6,7],
+      [-1,-100,3,99]
+    ]
+    
+    k = [3, 2]
+    
+    expected = [
+      [5,6,7,1,2,3,4],
+      [3,99,-1,-100]
+    ]
+    
+    for i in range(len(nums)):
+      Test._print_example_header(i + 1)
+      Test.solution.rotate(nums[i], k[i])
+      Test._print_result(nums[i], expected[i])
+    
+  def _test121():
+    Test._print_header("121. Best Time to Buy and Sell Stock")
+
+    prices = [
+      [7,1,5,3,6,4],
+      [7,6,5,3,1]
+    ]
+    
+    expected = [5, 0]
+    
+    for i in range(len(prices)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.maxProfit(prices[i])
+      Test._print_result(result, expected[i])
+  
+  def _test122():
+    Test._print_header("122. Best Time to Buy and Sell Stock II")
+
+    prices = [
+      [7,1,5,3,6,4],
+      [1,2,3,4,5],
+      [7,6,4,3,1]
+    ]
+    
+    expected = [7, 4, 0]
+    
+    for i in range(len(prices)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.maxProfit2(prices[i])
+      Test._print_result(result, expected[i])
+  
+  def _test55():
+    Test._print_header("55. Jump Game")
+    
+    nums = [
+      [2,3,1,1,4],
+      [3,2,1,0,4],
+      [0],
+      [2,5,0,0]
+    ]
+    
+    expected = [True, False, True, True]
+    
+    for i in range(len(nums)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.canJump(nums[i])
+      Test._print_result(result, expected[i])
+  
+  def _test45():
+    Test._print_header("45. Jump Game II")
+    
+    nums = [
+      [2,3,1,1,4],
+      [2,3,0,1,4]
+    ]
+    
+    expected = [2,2]
+    
+    for i in range(len(nums)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.jump(nums[i])
+      Test._print_result(result, expected[i])
+  
+  def _test274():
+    Test._print_header("274. H-Index")
+    
+    citations = [
+      [3,0,6,1,5],
+      [1,3,1],
+      [100],
+      [0],
+      [0,0]
+    ]
+    
+    expected = [3,1,1,0,0]
+    
+    for i in range(len(citations)):
+      Test._print_example_header(i + 1)
+      result = Test.solution.hIndex(citations[i])
+      Test._print_result(result, expected[i])
+  
   # ============================ STORE PROBLEMS ============================ 
   problems[1679] = _test1679
   problems[238] = _test238
@@ -436,6 +782,26 @@ class Test:
   problems[88] = _test88
   problems[46] = _test46
   problems[47] = _test47
+  problems[494] = _test494
+  problems[392] = _test392
+  problems[70] = _test70
+  problems[983] = _test983
+  problems[322] = _test322
+  problems[518] = _test518
+  problems[649] = _test649
+  problems[2095] = _test2095
+  problems[328] = _test328
+  problems[206] = _test206
+  problems[7] = _test7
+  problems[27] = _test27
+  problems[26] = _test26
+  problems[80] = _test80
+  problems[189] = _test189
+  problems[121] = _test121
+  problems[122] = _test122
+  problems[55] = _test55
+  problems[45] = _test45
+  problems[274] = _test274
   
   @staticmethod
   def show_problems():
@@ -462,5 +828,6 @@ class Test:
     try:
       Test.problems[problem]()
     except Exception as e:
-      print(f"{problem} threw {e}\n")  
+      print(f"{problem} threw an exception:\n")
+      traceback.print_exc()  
   
